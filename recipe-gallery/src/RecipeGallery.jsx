@@ -34,13 +34,13 @@ export default function RecipeGallery () {
     const listRecipes = recipes.map((recipe) => {
         return (
             <ul type="none" className="recipeCard">
-                <li>
+                <li key={recipe.id}>
                     {recipe.title}
                 </li>
-                <li>
+                <li key={recipe.id}>
                     Ingredients: {recipe.ingredients}
                 </li>
-                <li>
+                <li key={recipe.id}>
                     <img src={recipe.image} alt={recipe.title}/>
                 </li>
             </ul>
