@@ -1,4 +1,9 @@
+import { useState } from "react";
+
 export default function RecipeGallery () {
+
+    const [index, setIndex] = useState(0);
+
     const recipes = [
         {
             id: 1,
@@ -31,20 +36,42 @@ export default function RecipeGallery () {
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Boong_o_bbang.jpg/250px-Boong_o_bbang.jpg"
         },
     ];
-    const listRecipes = recipes.map((recipe) => {
-        return (
-            <ul type="none" className="recipeCard">
-                <li key={recipe.id}>
-                    {recipe.title}
-                </li>
-                <li key={recipe.id}>
-                    Ingredients: {recipe.ingredients}
-                </li>
-                <li key={recipe.id}>
-                    <img src={recipe.image} alt={recipe.title}/>
-                </li>
-            </ul>
-        );
-    });
-    return <div className="recipes">{listRecipes}</div>;
+    // const listRecipes = recipes.map((recipe) => {
+    //     return (
+    //         <ul type="none" className="recipeCard" key = {recipe.id}>
+    //             <li>
+    //                 {recipe.title}
+    //             </li>
+    //             <li>
+    //                 Ingredients: {recipe.ingredients}
+    //             </li>
+    //             <li>
+    //                 <img src={recipe.image} alt={recipe.title}/>
+    //             </li>
+    //         </ul>
+    //     );
+    // });
+
+    const forward = () => {
+        if (index < recipes.length - 1) {
+            setIndex(n => n + 1)
+        }
+    }
+
+    const backward = () => {
+        if (index > 0) {
+            setIndex(n => n - 1)
+        }
+    }
+    return <div>
+
+        <button onClick={backward}>Previous</button>
+        <button onClick={forward}>Next</button>
+        <ul>
+            <li>{recipes[index].title}</li>
+            <li>Ingredients: {recipes[index].ingredients.join(", ")}</li>
+            <li><img src={recipes[index].image} alt={recipes[index].title} /></li>
+        </ul>
+
+    </div>;
 }
